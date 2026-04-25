@@ -34,3 +34,19 @@ TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_INCLUDE_RECOVERY_DTBO := true
+
+# BootIMG
+LZMA_RAMDISK_TARGETS := recovery
+BOARD_RAMDISK_USE_LZMA := true
+
+BOARD_KERNEL_CMDLINE := \
+	androidboot.hardware=exynos9610 \
+	androidboot.selinux=permissive
+
+BOARD_MKBOOTIMG_ARGS := \
+	--base 0x10000000 \
+	--kernel_offset 0x00008000 \
+	--pagesize 2048 \
+	--ramdisk_offset 0x01000000 \
+	--tags_offset 0x00000100 \
+	--header_version 1
